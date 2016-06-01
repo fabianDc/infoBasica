@@ -1,0 +1,144 @@
+<div class="container">
+
+    <div class="panel panel-default">
+        <div class="panel-heading color-sdis">
+            <span class="glyphicon glyphicon-info-sign"></span>
+            Estructura de Servicio
+        </div>
+
+        <div class="panel-body">
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading color-sdis">
+            <span class="glyphicon glyphicon-user"></span>
+            Talento Humano
+        </div>
+
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-lg-12 text-right">
+                    <button class="btn btn-sdis btn-xs" ng-click="addRecurso()">
+                        <span class="glyphicon glyphicon-plus"></span> Añadir
+                    </button>
+                    <input type="hidden" id="cod" value="48">
+                </div>  
+            </div>
+            <br>
+            <div id="lista_cotizaciones">
+                <form class="form_cotizacion" method="POST" enctype="multipart/form-data">
+                    <div class="alert alert-warning"  ng-show="!talentoHumano.length">
+                        <span class=" glyphicon glyphicon-warning-sign"></span> 
+                        ¿No desea agregar nigun recurso Humano?
+                        <br>
+                    </div>
+                   
+                    <div class="panel panel-default original" ng-animate="'animate'" ng-repeat="recurso in talentoHumano track by $index">
+                        <div class="panel-heading">
+                            <span class="glyphicon glyphicon-paperclip"></span> <label class="titulo"  >Recurso</label>
+                            <span class="glyphicon glyphicon-trash" ng-click="deleteRecurso($index)" style="float: right;"></span>
+                        </div>
+                        <div class="panel-body" >          
+                            <div >
+                                <div class="row">                                   
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">Cantidad</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" ng-model="recurso.cantidad" required >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">Cargo</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" ng-model="recurso.cargo"  >                 
+                                                    <option value="" selected>Seleccione...</option>
+                                                </select>                                                   
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">Perfil</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" ng-model="recurso.perfil" >                 
+                                                    <option value="" selected="">Seleccione...</option>
+                                                </select>                                                      
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">Honorarios por mes</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" ng-model="recurso.honorarios"  required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">Disponibilidad</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" ng-model="recurso.tipoContrato"  >                 
+                                                    <option value="" selected="">Seleccione...</option>
+                                                </select>                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label"> Submodalidad </label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" ng-model="recurso.submodalidad"  >                 
+                                                    <option value="" selected="">Seleccione...</option>
+                                                </select>      
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  
+                    </div>
+                </form>
+            </div>
+            <br>
+                        <div class="row">
+                            <div class="col-lg-12 text-ceter">                    
+                                <pre>
+                                    {{talentoHumano}}
+                                </pre>
+                            </div>  
+                        </div>
+            <div class="row">
+                <div class="col-lg-12 text-right">                    
+                    <button class="btn btn-sdis btn-xs" ng-click="addRecurso()">
+                        <span class="glyphicon glyphicon-plus"></span> Añadir
+                    </button>
+                </div>  
+            </div>
+             <br>
+            <div class="panel-footer text-center">
+                <div class="btn btn-info" ng-click="guardar()" ng-disabled="submit">
+                    <span class="glyphicon glyphicon-floppy-saved"> </span> Guardar y Contiuar
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

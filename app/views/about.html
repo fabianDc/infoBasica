@@ -1,0 +1,326 @@
+<div class="container">
+    <!-- Contenido  -->      
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <a class="btn btn-default btn-xs"  data-loading-text="Creando Estructura...">
+                Siguiente 
+                <span class="glyphicon glyphicon-arrow-right"></span>
+            </a>
+        </div>
+    </div>
+    <br>
+    <div class="panel panel-default">
+        <div class="panel-heading color-sdis">
+            <span class="glyphicon glyphicon-info-"></span>
+            Info Basica
+        </div>
+
+        <div class="panel-body">                    
+            <form  name="pasounoForm" ng-submit="guardar()" >
+                <input type="text" hidden id="codEst" ng-model="matriz.CodServicio" >
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-left ">
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Nombre</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" ng-model="matriz.Nombre" >                              
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-left ">
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Proyecto responsable</label>
+                            <div class="col-sm-7 form-group">
+                                <select class="form-control"  ng-model="matriz.CodProyecto" ng-change="cargarModalidades()" title="proyecto">
+                                    <option value="" selected>Seleccione...</option>
+                                    <option value="{{proyecto.Codproyecto}}" ng-repeat="proyecto in proyectos">{{proyecto.Nomproyecto}}</option>
+                                </select> 
+                            </div>
+                        </div>
+                    </div>
+                </div>                                               
+                <hr>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-left ">
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Tipo calendario</label>
+                            <div class="col-sm-7">
+                                <select class="form-control"  ng-model="matriz.CodTipoCalendario" >  
+                                    <option value="" selected="">Seleccione...</option>
+                                    <option ng-repeat="calendario in calendarios"  value="{{calendario.CodTipoCalendario}}">{{calendario.Nombre}}</option>
+                                </select>                  
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-left ">
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Tipo semana</label>
+                            <div class="col-sm-7">
+                                <select class="form-control" ng-model="matriz.CodTipoSemana"> 
+                                    <option value="" selected="">Seleccione...</option>
+                                    <option ng-repeat="semana in semanas"  value="{{semana.CodTipoSemana}}">{{semana.Nombre}}</option>
+                                </select>               
+                            </div>
+                        </div>
+                    </div>
+                </div>                   
+                <hr>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-left ">
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Tiempo de operacion</label>
+                            <div class="col-sm-7">
+
+                                <input type='text' class="form-control" ng-model="matriz.Duracion" />                                          
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-left ">
+                        <label class=" col-lg-12 col-md-12 col-sm-12 control-label">
+                            <input checked type="checkbox" ng-model="matriz.chekCorte"> 
+                            Corte programado
+                        </label>
+                    </div>
+                </div>
+                <hr>
+                <div ng-show="matriz.chekCorte">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left ">
+                            <div class="col-sm-10 col-lg-10 col-md-10" >                                       
+                                <span class="glyphicon glyphicon-plus btn btn-info " ng-click="addCorte()" ></span>
+                                <span class="glyphicon glyphicon-minus btn btn-danger "  ng-click="borrarCorte()" ></span>  
+                                Agregue los cortes programados que necesite
+                            </div>
+
+                        </div>
+                    </div>
+                    <hr>
+                    <div id="cortes" ng-repeat="corte in matriz.cortes" >
+
+                        <div class="row" >
+                            <div class="col-sm-12 col-lg-6 col-md-6 " >
+                                <label class="col-sm-5 control-label">fecha Inicial</label>
+                                <div class="col-sm-7 input-group">
+                                    <input type='hidden' class="form-control" ng-model="corte.CodCierre"  datetime-picker date-format="yyyy-MM-dd  HH:mm:ss" date-only />
+                                    <input type='text' class="form-control" ng-model="corte.FechaInicio"  datetime-picker date-format="yyyy-MM-dd  HH:mm:ss" date-only />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>                   
+                            <div class="col-sm-12 col-lg-6 col-md-6" >
+                                <label class="col-sm-5 control-label">fecha final</label>
+                                <div class="col-sm-7 input-group">
+
+
+                                    <input type='text' class="form-control" ng-model="corte.FechaFin" datetime-picker date-format="yyyy-MM-dd HH:mm:ss" date-only />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>      
+                            <br>
+                            <br>
+                            <div class="col-sm-12 col-lg-12 col-md-12 " >
+                                <label class="col-sm-5 col-lg-2 col-md-6 control-label">Explicaci�n</label>
+                                <div class="col-sm-7 col-lg-10 col-md-6">
+                                    <input type='text' class="form-control" ng-model="corte.Justificacion" />
+                                </div>
+                            </div>                   
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">     
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-left ">
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Modalidad</label>
+                            <div class="col-sm-7">
+                                <select   class="form-control" ng-model="matriz.CodModalidad"  ng-change="cargarUnidades()" ng-disabled="!matriz.proyecto" >                 
+                                    <option value="" selected>Seleccione...</option>
+                                    <option value="{{modalidad.Idmodalidad}}" ng-repeat="modalidad in modalidades"> {{modalidad.Nommodalidad}}</option>
+                                </select> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-left ">
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Plan de desarrollo</label>
+                            <div class="col-sm-7">
+                                <select class="form-control disabled" ng-model="matriz.CodEjePlan" >                                                                                      
+                                    <option value="" selected>Seleccione...</option>
+                                </select>                      
+                            </div>
+                        </div>
+                    </div>
+                </div>                                               
+                <hr>
+                <div class="row">                                    
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-left ">
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Eje plan de Desarrollo</label>
+                            <div class="col-sm-7">
+                                <select class="form-control" ng-model="matriz.ejePlan" ng-disabled="!matriz.CodMmodalidad" > 
+                                    <option value="" selected="">Seleccione...</option>                                    
+                                </select> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-left ">
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Nivel de atenci�n</label>
+                            <div class="col-sm-7">
+                                <select class="form-control" ng-model="matriz.submodalidad"  ng-disabled="!matriz.CodModalidad" >    
+                                    <option value="" selected="">Seleccione...</option>
+                                </select>   
+                            </div>
+                        </div>
+                    </div>
+                </div>                                               
+                <hr>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-left ">
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Unidad Operativa</label>
+                            <div class="col-sm-7">
+                                <select class="form-control" ng-model="matriz.uniOperativa"  ng-disabled="!matriz.CodModalidad" > 
+                                    <option selected>Seleccione...</option>
+                                    <option value="{{uniOperativa.Codundope}}" ng-repeat="uniOperativa in unidadesOperativas" >{{uniOperativa.Nomundope}}</option>
+                                </select>                                          
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-left ">
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">UPZ</label>
+                            <div class="col-sm-7">
+                                 <select class="form-control" ng-model="matriz.CodUpz"  ng-disabled="true" > 
+                                    <option selected>Seleccione...</option>
+                                    <option value="{{upz.Codupz}}" ng-repeat="upz in upezetas" >{{upz.Nomupz}}</option>
+                                </select>   
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-left ">
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Barrio</label>
+                            <div class="col-sm-7">
+                                <select class="form-control" ng-model="matriz.barrio"  ng-disabled="!matriz.modalidad" >                 
+                                    <option value="" selected>Seleccione...</option>
+                                </select>                                           
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-left ">
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">vigencia</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" ng-model="matriz.vigencia"/>                                                             
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-left ">
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Cobertura (cupos)</label>
+                            <div class="col-sm-7">
+                                <input type="text" ng-class="{
+                                            'danger': pasounoForm.Cupos.$error.required || pasounoForm.Cupos.$error.minlength || pasounoForm.Cupos.$error.maxlength }" class="form-control"  name="cupos" ng-model="matriz.Cupos"  ng-minlength="1" ng-maxlength="5" required>
+
+                                <div role="alert" >
+                                    <span  ng-show="pasounoForm.Cupos.$error.required">
+                                        Required!</span>
+                                    <span  ng-show="pasounoForm.Cupos.$error.minlength">
+                                        Not valid number!</span>
+                                    <span ng-show="pasounoForm.Cupos.$error.maxlength">
+                                        Not valid number!</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-left ">
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Numero de asociados u operadores</label>
+                            <div class="col-sm-7">
+                                <div class="form-group">
+
+                                    <select class="form-control" ng-model="matriz.NumeroOperadores" >                 
+                                        <option value="" selected>Sin operadores</option>
+                                        <option value='1'>1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+
+                                    </select>  
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr/>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-left ">
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Anexo t�cnico</label>
+                            <div class="col-sm-7">
+                                <input type="file" class="form-control file"  ng-model="matriz.docAnexo" >
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-left ">
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Estudio del sector</label>
+                            <div class="col-sm-7">
+                                <input type="file" class="form-control file"  ng-model="matriz.docSector">                                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr/>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-left ">
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label"> Estudios previos </label>
+                            <div class="col-sm-7">
+                                <input type="file" class="form-control file"   ng-model="matriz.docPrevios">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-left ">
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">
+                                <input type="checkbox"  ng-model="matriz.chkAdicional" >
+                                Soporte Adicional</label>
+                            <div class="col-sm-7">
+                                <input type="file" class="form-control file" ng-disabled="!matriz.chkAdicional"  ng-model="matriz.docAdicional">
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+                <pre>
+                    {{matriz}}                
+                </pre>
+                <hr>               
+                <!-- boton de guardado-->
+                <div class="panel-footer text-center">
+                    <div class="btn btn-info" ng-click="guardar()" ng-disabled="submit">
+                        <span class="glyphicon glyphicon-floppy-saved"> </span> Guardar y Contiuar
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>  
+</div>     
